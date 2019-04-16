@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>更新用户界面</title>
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}">
+    <script type="text/javascript" th:src="@{js/jquery-3.1.1.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: #2aabd2" class="text-center">修改用户</h2>
+        <br/>
+        <form th:action="@{/edit}" th:object="${user}" method="post" class="form-horizontal">
+            <input type="hidden" name="id" th:value="*{id}">
+            <div class="form-group">
+                <label for="userName" class="col-sm-offset-2 col-sm-2 control-label">用户名</label>
+                <div class="col-sm-4">
+                    <input type="text" th:value="*{userName}" class="form-control" id="userName" name="userName" placeholder="用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pwd" class="col-sm-offset-2 col-sm-2 control-label">密码</label>
+                <div class="col-sm-4">
+                    <input type="password" th:value="*{pwd}" class="form-control" id="pwd" name="pwd" placeholder="密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="age" class="col-sm-offset-2 col-sm-2 control-label">年龄</label>
+                <div class="col-sm-2">
+                    <input type="number" th:value="*{age}" class="form-control" id="age" name="age" placeholder="年龄">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-3">
+                    <input type="submit" class="btn btn-info btn-lg" value="修改">
+                    <a th:href="@{/list}" class="btn btn-primary btn-lg">返回</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

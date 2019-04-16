@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户列表</title>
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/bootstrap-theme.min.css}">
+    <script type="text/javascript" th:src="@{js/jquery-3.1.1.js}"></script>
+    <script type="text/javascript" th:src="@{js/bootstrap.min.js}"></script>
+</head>
+<body class="container">
+    <h2 style="color: #2aabd2" class="text-center">用户列表</h2>
+    <br/>
+
+    <!-- 使表单内容在同一行 -->
+    <!--<form class="form-inline col-sm-offset-4" th:action="@{/searchUser}" method="get">
+        <input type="text" class="form-control" id="userName" name="userName" placeholder="用户名">
+        <button type="submit" class="btn btn-info">
+            <span class="glyphicon glyphicon-search">&nbsp;Search</span>
+        </button>
+    </form>-->
+
+    <div class="col-sm-offset-2 col-sm-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>用户名</th>
+                    <th>密码</th>
+                    <th>年龄</th>
+                    <th>注册时间</th>
+                    <th>编辑</th>
+                    <th>删除</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user :${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.userName}"></td>
+                    <td th:text="${user.pwd}"></td>
+                    <td th:text="${user.age}"></td>
+                    <td th:text="${user.regTime}"></td>
+                    <td><a th:href="@{/toEdit(id=${user.id})}"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td><a th:href="@{/delete(id=${user.id})}" onclick="return confirm('确定删除此用户吗?')"><span class="glyphicon glyphicon-trash"></span></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-2 control-label">
+            <a href="/toAdd" class="btn btn-primary">添加</a>
+        </div>
+    </div>
+    <br/>
+    <!-- 分页组按钮 -->
+    <div class="btn-group" role="button">
+        <a th:href="@{/list(start=0)}" class="btn btn-info">[首页]</a>&nbsp;&nbsp;
+        <a th:if="${not users.isFirst()}" th:href="@{/list(start=${users.number -1})}" class="btn btn-primary">[上页]</a>&nbsp;&nbsp;
+        <a th:if="${not users.isLast()}" th:href="@{/list(start=${users.number +1})}" class="btn btn-primary">[下页]</a>&nbsp;&nbsp;
+        <a th:href="@{/list(start=${users.totalPages -1})}" class="btn btn-info">[末页]</a>
+    </div>
+    <br/>
+    <h3 class="text-center" style="color: #4cae4c;font-style: italic">author:autumn_leaf</h3>
+</body>
+</html>
